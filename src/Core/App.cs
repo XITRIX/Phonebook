@@ -8,6 +8,8 @@ namespace Phonebook.Core
     {
         public override void Initialize()
         {
+            new API.App().RegisterServices();
+
             RegisterAppStart<MainViewModel>();
         }
     }

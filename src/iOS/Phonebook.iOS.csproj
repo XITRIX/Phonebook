@@ -86,6 +86,7 @@
     <Reference Include="MvvmCross">
       <HintPath>..\packages\MvvmCross.6.2.2\lib\xamarinios10\MvvmCross.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -111,11 +112,16 @@
     <Compile Include="Views\MainView.designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Phonebook.Core.csproj">
       <Project>{ED50141E-A3AB-44B6-B4CB-79D52063E234}</Project>
       <Name>Phonebook.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\API\Phonebook.API.csproj">
+      <Project>{8E71322E-EC7F-4167-A34C-414F83FE22BC}</Project>
+      <Name>Phonebook.API</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
