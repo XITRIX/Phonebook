@@ -1,9 +1,0 @@
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/bin/Debug/netstandard2.0/Phonebook.API.deps.json
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/bin/Debug/netstandard2.0/Phonebook.API.dll
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/bin/Debug/netstandard2.0/Phonebook.API.pdb
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.csprojAssemblyReference.cache
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.csproj.CoreCompileInputs.cache
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.AssemblyInfoInputs.cache
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.AssemblyInfo.cs
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.dll
-/Users/admin/Documents/GitHub/Phonebook/Phonebook/API.API/obj/Debug/netstandard2.0/Phonebook.API.pdb
