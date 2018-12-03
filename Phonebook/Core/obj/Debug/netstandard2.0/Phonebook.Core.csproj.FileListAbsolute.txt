@@ -1,0 +1,9 @@
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/bin/Debug/netstandard2.0/Phonebook.Core.deps.json
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/bin/Debug/netstandard2.0/Phonebook.Core.dll
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/bin/Debug/netstandard2.0/Phonebook.Core.pdb
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.csprojAssemblyReference.cache
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.csproj.CoreCompileInputs.cache
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.AssemblyInfoInputs.cache
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.AssemblyInfo.cs
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.dll
+/Users/admin/Documents/GitHub/Phonebook/Phonebook/Core/obj/Debug/netstandard2.0/Phonebook.Core.pdb
