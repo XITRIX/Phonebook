@@ -7,4 +7,7 @@
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.2.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
 </Project>
