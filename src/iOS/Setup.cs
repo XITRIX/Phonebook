@@ -13,9 +13,7 @@ namespace Phonebook.iOS
         {
             base.InitializeFirstChance();
 
-            Mvx.IoCProvider.RegisterSingleton<IConnectionService>(() => { 
-                return new ConnectionService(new NSUrlSessionHandler());
-            });
+            Mvx.IoCProvider.RegisterSingleton<IConnectionService>(() => new ConnectionService(new NSUrlSessionHandler()));
         }
     }
 }
