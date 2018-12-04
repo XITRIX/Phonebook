@@ -14,12 +14,16 @@ using MvvmCross.Commands;
 using MvvmCross.Binding.Bindings.Target;
 using System.Windows.Input;
 using Phonebook.iOS.Views.Contacts.Cells;
+using System.Threading.Tasks;
+using Phonebook.Core.ViewModels.Contacts;
 
 namespace Phonebook.iOS.Views.Contacts
 {
     [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class MainView : MvxViewController<MainViewModel>
     {
+        ICommand RefreshCommand { get; set; }
+
         public MainView()
         : base("MainView", null)
         {
@@ -35,10 +39,31 @@ namespace Phonebook.iOS.Views.Contacts
             set.Bind(source).To(vm => vm.Items);
             set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
             set.Bind(this).For(s => s.Title).To(vm => vm.Title);
+            set.Bind(this).For(s => s.RefreshCommand).To(vm => vm.RefreshContactsCommand);
             set.Apply();
+
+            AddRefreshControl();
 
             tableView.Source = source;
             tableView.ReloadData();
+        }
+
+        private void AddRefreshControl()
+        {
+            if (UIDevice.CurrentDevice.CheckSystemVersion(6, 0))
+            {
+                var refreshControl = new UIRefreshControl();
+                refreshControl.ValueChanged += (sender, e) =>
+                {
+                    refreshControl.BeginRefreshing();
+                    if (RefreshCommand?.CanExecute(null) ?? false)
+                    { //TODO: RefreshCommand == null, need to fix it!
+                        RefreshCommand.Execute(null);
+                    }
+                    refreshControl.EndRefreshing();
+                };
+                tableView.Add(refreshControl);
+            }
         }
     }
 
