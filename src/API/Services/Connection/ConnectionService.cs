@@ -19,12 +19,12 @@ namespace Phonebook.API.Services.Connection
 
         public async Task<RequestResult> Get(Uri uri)
         {
-            return await SendAsync(uri);
+            return await SendAsync(uri).ConfigureAwait(false);
         }
 
         public async Task<RequestResult> Post(Uri uri, HttpContent httpContent)
         {
-            return await SendAsync(uri, httpContent);
+            return await SendAsync(uri, httpContent).ConfigureAwait(false);
         }
 
         private async Task<RequestResult> SendAsync(Uri uri, HttpContent httpContent = null)
@@ -36,15 +36,26 @@ namespace Phonebook.API.Services.Connection
                 Method = httpContent == null ? HttpMethod.Get : HttpMethod.Post
             };
 
-            var response = await _httpClient.Value.SendAsync(requestMessage);
+            RequestResult result = null;
 
-            return new RequestResult()
+            try
             {
-                Data = response.Content,
-                ResponseCode = response.StatusCode,
-                ResponseHeaders = response.Headers.ToDictionary(x => x.Key, x => x.Value),
-                Uri = uri,
-            };
+                var response = await _httpClient.Value.SendAsync(requestMessage).ConfigureAwait(false);
+
+                result = new RequestResult()
+                {
+                    Data = response.Content,
+                    ResponseCode = response.StatusCode,
+                    ResponseHeaders = response.Headers.ToDictionary(x => x.Key, x => x.Value),
+                    Uri = uri,
+                };
+            }
+            catch (Exception)
+            {
+                //TODO: handle
+            }
+
+            return result;
         }
     }
 }

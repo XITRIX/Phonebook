@@ -9,18 +9,19 @@ namespace Phonebook.API.Services
     {
         protected IConnectionService ConnectionService { get; }
 
-        BaseService(IConnectionService connectionService) {
+        protected BaseService(IConnectionService connectionService)
+        {
             ConnectionService = connectionService;
         }
 
-        public async Task<T> Get<T>(Uri uri)
+        protected virtual async Task<T> Get<T>(Uri uri)
             where T : class, new()
         {
             var requestResult = await ConnectionService.Get(uri);
             return await ParseResult<T>(requestResult);
         }
 
-        public async Task<T> Post<T>(Uri uri, HttpContent httpContent)
+        protected virtual async Task<T> Post<T>(Uri uri, HttpContent httpContent)
             where T : class, new()
         {
             var requestResult = await ConnectionService.Post(uri, httpContent);

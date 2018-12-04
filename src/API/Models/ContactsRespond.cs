@@ -10,6 +10,6 @@ namespace Phonebook.API.Models
 
     public class InfoModel 
     {
-        public string Page { get; set; }
+        public int Page { get; set; }
     }
 }

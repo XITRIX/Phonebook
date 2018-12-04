@@ -1,18 +1,15 @@
 ﻿using System;
 using MvvmCross.ViewModels;
+using MvvmCross;
+using Phonebook.API.Services.Contacts;
 
 namespace Phonebook.API
 {
     public class App
     {
-        public App()
-        {
-            RegisterServices();
-        }
-
         public void RegisterServices()
         {
-            throw new NotImplementedException();
+            Mvx.IoCProvider.RegisterType<IContactsService, ContactsService>();
         }
     }
 }
