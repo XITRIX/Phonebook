@@ -5,8 +5,10 @@
     android:orientation  ="vertical"
     android:layout_width ="match_parent"
     android:layout_height="match_parent">
-    <Button
+    <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
         android:layout_width ="match_parent"
-        android:layout_height="wrap_content"
-        app:MvxBind          ="Click ButtonClickedCommand; Text Text" />
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        app:MvxItemTemplate  ="@layout/contact_item"
+        app:MvxBind          ="ItemsSource Items; Text Text" />
 </LinearLayout>

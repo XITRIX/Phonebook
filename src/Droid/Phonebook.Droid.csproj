@@ -107,6 +107,16 @@
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.RecyclerView.6.2.2\lib\monoandroid81\MvvmCross.Droid.Support.V7.RecyclerView.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android.Export" />
+    <Reference Include="FFImageLoading">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.4.4.859\lib\MonoAndroid10\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.4.4.859\lib\MonoAndroid10\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -114,6 +124,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Views\MainView.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -130,7 +141,8 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\layout\MainView.axml" />
+    <AndroidResource Include="Resources\layout\contact_item.axml" />
+    <AndroidResource Include="Resources\layout\activity_contacts_list.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Phonebook.Core.csproj">
