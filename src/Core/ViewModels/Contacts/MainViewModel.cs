@@ -41,14 +41,12 @@ namespace Phonebook.Core.ViewModels
                 {
                     try
                     {
-                        var result = await ContactsService.GetContacts(page, COUNT).ConfigureAwait(false);
+                        var result = await ContactsService.GetContacts(++page, COUNT).ConfigureAwait(false);
 
                         if (result == null)
                         {
                             //TODO: handle
                         }
-
-                        page = result.info.Page;
 
                         var dataSource = new MvxObservableCollection<ContactItemVm>(result.results.Select(SetupItem));
                         Items.AddRange(dataSource);
