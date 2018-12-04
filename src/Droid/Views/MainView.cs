@@ -8,6 +8,7 @@ using Android.Support.V7.Widget;
 using Java.Security;
 using System.Windows.Input;
 using MvvmCross.Binding.BindingContext;
+using System;
 
 namespace Phonebook.Droid
 {
@@ -34,9 +35,10 @@ namespace Phonebook.Droid
     class BottomReachedScrollListener : MvxRecyclerView.OnScrollListener
     {
         public ICommand PagingCommand { get; set; }
-        public override void OnScrollStateChanged(RecyclerView recyclerView, int newState)
+
+        public override void OnScrolled(RecyclerView recyclerView, int dx, int dy)
         {
-            base.OnScrollStateChanged(recyclerView, newState);
+            base.OnScrolled(recyclerView, dx, dy);
 
             if (!recyclerView.CanScrollVertically(1) &&
             (PagingCommand?.CanExecute(null) ?? false))

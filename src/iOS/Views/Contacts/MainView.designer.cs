@@ -8,7 +8,7 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 
-namespace Phonebook.iOS.Views
+namespace Phonebook.iOS.Views.Contacts
 {
     [Register ("MainView")]
     partial class MainView

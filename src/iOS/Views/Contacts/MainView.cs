@@ -15,7 +15,7 @@ using MvvmCross.Binding.Bindings.Target;
 using System.Windows.Input;
 using Phonebook.iOS.Views.Contacts.Cells;
 
-namespace Phonebook.iOS.Views
+namespace Phonebook.iOS.Views.Contacts
 {
     [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class MainView : MvxViewController<MainViewModel>
@@ -58,9 +58,6 @@ namespace Phonebook.iOS.Views
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            //var cell = TableView.DequeueReusableCell(CellIdentifier, indexPath) as ContactsCell;
-            //cell.Title.Text = (item as ContactItemVm).GetFullName();
-
             if (indexPath.Row >= RowsInSection(tableView, indexPath.Section) - 5 &&
                 (PagingCommand?.CanExecute(null) ?? false))
             {
