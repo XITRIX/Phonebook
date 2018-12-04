@@ -9,7 +9,7 @@ using System.Net;
 using System.Xml.Linq;
 using MvvmCross.Commands;
 
-namespace Phonebook.Core.ViewModels
+namespace Phonebook.Core.ViewModels.Contacts
 {
     public class MainViewModel : MvxViewModel
     {
@@ -18,6 +18,7 @@ namespace Phonebook.Core.ViewModels
 
         public string Title => "Contacts";
         public MvxAsyncCommand LoadContactsCommand => new MvxAsyncCommand(LoadContacts);
+        public MvxAsyncCommand RefreshContactsCommand => new MvxAsyncCommand(RefreshContacts);
 
         private MvxObservableCollection<ContactItemVm> _items;
         public MvxObservableCollection<ContactItemVm> Items
@@ -34,29 +35,31 @@ namespace Phonebook.Core.ViewModels
             Items = new MvxObservableCollection<ContactItemVm>();
         }
 
-        private Task LoadContacts()
+        private async Task LoadContacts()
         {
-            return Task.Run(async () =>
+            try
             {
+                var result = await ContactsService.GetContacts(++page, COUNT).ConfigureAwait(false);
+
+                if (result == null)
                 {
-                    try
-                    {
-                        var result = await ContactsService.GetContacts(++page, COUNT).ConfigureAwait(false);
-
-                        if (result == null)
-                        {
-                            //TODO: handle
-                        }
-
-                        var dataSource = new MvxObservableCollection<ContactItemVm>(result.results.Select(SetupItem));
-                        Items.AddRange(dataSource);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        //TODO: handle
-                    }
+                    //TODO: handle
                 }
-            });
+
+                var dataSource = new MvxObservableCollection<ContactItemVm>(result.results.Select(SetupItem));
+                Items.AddRange(dataSource);
+            }
+            catch (System.Exception ex)
+            {
+                //TODO: handle
+            }
+        }
+
+        private async Task RefreshContacts()
+        {
+            page = 0;
+            Items.Clear();
+            await LoadContacts();
         }
 
         private ContactItemVm SetupItem(User model)

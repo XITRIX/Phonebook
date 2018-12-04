@@ -1,6 +1,6 @@
 ﻿using System;
 using MvvmCross.ViewModels;
-using Phonebook.Core.ViewModels;
+using Phonebook.Core.ViewModels.Contacts;
 
 namespace Phonebook.Core
 {
