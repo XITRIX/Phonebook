@@ -112,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.xib" />
-    <InterfaceDefinition Include="Views\Contacts\MainView.xib" />
+    <InterfaceDefinition Include="Views\Contacts\ContactsViewController.xib" />
     <InterfaceDefinition Include="Views\Contacts\Cells\ContactsCell.xib" />
   </ItemGroup>
   <ItemGroup>
@@ -124,14 +124,16 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\Contacts\MainView.cs" />
-    <Compile Include="Views\Contacts\MainView.designer.cs">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <Compile Include="Views\Contacts\ContactsViewController.cs" />
+    <Compile Include="Views\Contacts\ContactsViewController.designer.cs">
+      <DependentUpon>ContactsViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Contacts\Cells\ContactsCell.cs" />
     <Compile Include="Views\Contacts\Cells\ContactsCell.designer.cs">
       <DependentUpon>ContactsCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contacts\ContactsTableSource.cs" />
+    <Compile Include="MvxBoolConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Phonebook.Core.csproj">
