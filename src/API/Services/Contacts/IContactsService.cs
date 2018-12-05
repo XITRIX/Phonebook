@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Phonebook.API.Models;
 
 namespace Phonebook.API.Services.Contacts

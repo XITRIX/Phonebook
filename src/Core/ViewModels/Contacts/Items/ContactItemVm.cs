@@ -11,7 +11,7 @@ namespace Phonebook.Core.ViewModels.Contacts.Items
             this.model = model;
         }
 
-        public string FullName => $"{model.Name.last.FirstCharToUpper()} {model.Name.first.FirstCharToUpper()}";
-        public string PhotoPath => model.Picture.large;
+        public string FullName => $"{model.Name.Last.FirstCharToUpper()} {model.Name.First.FirstCharToUpper()}";
+        public string PhotoPath => model.Picture.Large;
     }
 }

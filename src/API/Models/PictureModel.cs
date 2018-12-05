@@ -1,12 +1,11 @@
 ﻿namespace Phonebook.API.Models
 {
-    public partial class User
+    public class PictureModel
     {
-        public class PictureModel
-        {
-            public string large;
-            public string medium;
-            public string thumbnail;
-        }
+        public string Large { get; set; }
+
+        public string Medium { get; set; }
+
+        public string Thumbnail { get; set; }
     }
 }

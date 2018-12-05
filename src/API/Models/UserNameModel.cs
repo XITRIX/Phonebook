@@ -1,12 +1,11 @@
 ﻿namespace Phonebook.API.Models
 {
-    public partial class User
+    public class UserNameModel
     {
-        public class UserNameModel
-        {
-            public string title;
-            public string first;
-            public string last;
-        }
+        public string Title { get; set; }
+
+        public string First { get; set; }
+
+        public string Last { get; set; }
     }
 }

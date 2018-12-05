@@ -1,9 +1,7 @@
-﻿using System;
-using MvvmCross;
+﻿using MvvmCross;
 using MvvmCross.Platforms.Android.Core;
 using Phonebook.API;
 using Phonebook.API.Services.Connection;
-using System.Net.Http;
 using Xamarin.Android.Net;
 
 namespace Phonebook.Droid

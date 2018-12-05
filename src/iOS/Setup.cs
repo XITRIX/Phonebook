@@ -1,8 +1,7 @@
-﻿using System;
-using MvvmCross.Platforms.Ios.Core;
+﻿using System.Net.Http;
 using MvvmCross;
+using MvvmCross.Platforms.Ios.Core;
 using Phonebook.API;
-using System.Net.Http;
 using Phonebook.API.Services.Connection;
 
 namespace Phonebook.iOS

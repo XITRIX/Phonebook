@@ -10,7 +10,7 @@ namespace Phonebook.Core
         {
             new API.App().RegisterServices();
 
-            RegisterAppStart<MainViewModel>();
+            RegisterAppStart<ContactsViewModel>();
         }
     }
 }

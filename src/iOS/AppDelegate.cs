@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using UIKit;
 using MvvmCross.Platforms.Ios.Core;
 
 namespace Phonebook.iOS

@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Net.Http;
-using Phonebook.API.Models;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Phonebook.API.Models;
+
 namespace Phonebook.API.Services.Connection
 {
     public class ConnectionService : IConnectionService
@@ -52,7 +53,7 @@ namespace Phonebook.API.Services.Connection
             }
             catch (Exception)
             {
-                //TODO: handle
+                result = new RequestResult { ResponseCode = System.Net.HttpStatusCode.NotFound };
             }
 
             return result;

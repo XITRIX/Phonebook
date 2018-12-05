@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace Phonebook.API.Models
 {
     public class ContactsRespond
     {
-        public List<User> results;
-        public InfoModel info;
-    }
+        [JsonProperty("results")]
+        public List<User> Contacts;
 
-    public class InfoModel 
-    {
-        public int Page { get; set; }
+        public InfoModel Info;
     }
 }
