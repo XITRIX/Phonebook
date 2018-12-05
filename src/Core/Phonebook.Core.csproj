@@ -9,5 +9,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\Contacts\" />
+    <Folder Include="ViewModels\Contacts\Items\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API\Phonebook.API.csproj" />
   </ItemGroup>
 </Project>
