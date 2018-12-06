@@ -110,12 +110,14 @@
     <Folder Include="Views\Contacts\" />
     <Folder Include="Views\Contacts\Cells\" />
     <Folder Include="Views\ContactDetails\" />
+    <Folder Include="Views\ContactPhoto\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.xib" />
     <InterfaceDefinition Include="Views\Contacts\ContactsViewController.xib" />
     <InterfaceDefinition Include="Views\Contacts\Cells\ContactsCell.xib" />
     <InterfaceDefinition Include="Views\ContactDetails\ContactDetailsViewController.xib" />
+    <InterfaceDefinition Include="Views\ContactPhoto\ContactPhotoViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -139,6 +141,10 @@
     <Compile Include="Views\ContactDetails\ContactDetailsViewController.cs" />
     <Compile Include="Views\ContactDetails\ContactDetailsViewController.designer.cs">
       <DependentUpon>ContactDetailsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContactPhoto\ContactPhotoViewController.cs" />
+    <Compile Include="Views\ContactPhoto\ContactPhotoViewController.designer.cs">
+      <DependentUpon>ContactPhotoViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

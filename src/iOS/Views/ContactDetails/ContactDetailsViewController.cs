@@ -4,6 +4,9 @@ using UIKit;
 using MvvmCross.Platforms.Ios.Views;
 using Phonebook.Core.ViewModels.ContactDetails;
 using MvvmCross.Binding.BindingContext;
+using System.Windows.Input;
+using MvvmCross.Platforms.Ios.Binding.Views.Gestures;
+using MvvmCross.Platforms.Ios.Binding;
 
 namespace Phonebook.iOS.Views.ContactDetails
 {
@@ -22,6 +25,7 @@ namespace Phonebook.iOS.Views.ContactDetails
             set.Bind(name).To(vm => vm.Name);
             set.Bind(phone).To(vm => vm.Phone);
             set.Bind(mail).To(vm => vm.Mail);
+            set.Bind(image).For(img => img.BindTap()).To(vm => vm.NavigateToPhotoCommand);
             set.Apply();
         }
     }
