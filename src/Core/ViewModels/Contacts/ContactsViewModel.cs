@@ -27,8 +27,8 @@ namespace Phonebook.Core.ViewModels.Contacts
         public IMvxCommand RefreshContactsCommand => _refreshContactsCommand ?? (_refreshContactsCommand = new MvxAsyncCommand(RefreshContacts));
 
         private IMvxAsyncCommand<ContactItemVm> _navigateToDetailsCommand;
-        public IMvxAsyncCommand<ContactItemVm> NavigateToDetailsCommand => _navigateToDetailsCommand ?? (_navigateToDetailsCommand = new MvxAsyncCommand<ContactItemVm>(item => { return _navigationService.Navigate<ContactDetailsViewModel, ContactItemVm>(item); }));
-        
+        public IMvxAsyncCommand<ContactItemVm> NavigateToDetailsCommand => _navigateToDetailsCommand ?? (_navigateToDetailsCommand = new MvxAsyncCommand<ContactItemVm>(NavigateToDetails));
+
         private MvxObservableCollection<ContactItemVm> _items;
         public MvxObservableCollection<ContactItemVm> Items
         {
@@ -68,10 +68,13 @@ namespace Phonebook.Core.ViewModels.Contacts
             {
                 var result = await ContactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
 
-                if (result == null || !result.Contacts.Any())
+                if (result == null)
                 {
-                    //TODO:
-                    return;
+                    throw new ArgumentException("Result can not be null");
+                }
+                if (!result.Contacts.Any())
+                {
+                    throw new ArgumentException("Result can not be empty");
                 }
 
                 _page++;
@@ -116,9 +119,14 @@ namespace Phonebook.Core.ViewModels.Contacts
             return new ContactItemVm(model);
         }
 
-        public override void ViewAppeared()
+        private Task<bool> NavigateToDetails(ContactItemVm item)
         {
-            base.ViewAppeared();
+            return _navigationService.Navigate<ContactDetailsViewModel, ContactItemVm>(item);
+        }
+
+        public override void ViewCreated()
+        {
+            base.ViewCreated();
 
             Task.Run(LoadContacts);
         }

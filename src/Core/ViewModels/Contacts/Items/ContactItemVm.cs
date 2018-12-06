@@ -5,15 +5,15 @@ namespace Phonebook.Core.ViewModels.Contacts.Items
 {
     public class ContactItemVm
     {
-        public User model;
+        public User Model { get; set; }
         public ContactItemVm(User model)
         {
-            this.model = model;
+            this.Model = model;
         }
 
-        public string FullName => $"{model.Name.Last.FirstCharToUpper()} {model.Name.First.FirstCharToUpper()}";
-        public string PhotoPath => model.Picture.Large;
-        public string Mail => model.Email;
-        public string Phone => model.Phone;
+        public string FullName => $"{Model.Name.Last.FirstCharToUpper()} {Model.Name.First.FirstCharToUpper()}";
+        public string PhotoPath => Model.Picture.Thumbnail;
+        public string Mail => Model.Email;
+        public string Phone => Model.Phone;
     }
 }

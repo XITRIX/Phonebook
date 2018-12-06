@@ -15,7 +15,7 @@ namespace Phonebook.Core.ViewModels.ContactDetails
         private IMvxAsyncCommand _navigateToPhotoCommand;
         public IMvxAsyncCommand NavigateToPhotoCommand => _navigateToPhotoCommand ?? (_navigateToPhotoCommand = new MvxAsyncCommand(() => { return _navigationService.Navigate<ContactPhotoViewModel, string>(Photo); }));
 
-        public string Photo => _contact.PhotoPath;
+        public string Photo => _contact.Model.Picture.Large;
         public string Name => _contact.FullName;
         public string Phone => _contact.Phone;
         public string Mail => _contact.Mail;
