@@ -8,7 +8,7 @@ namespace Phonebook.Core.ViewModels.ContactDetails
     {
         private ContactItemVm _contact;
 
-        public string Photo => _contact.PhotoPath;
+        public string Photo => _contact.Model.Picture.Large;
         public string Name => _contact.FullName;
         public string Phone => _contact.Phone;
         public string Mail => _contact.Mail;
