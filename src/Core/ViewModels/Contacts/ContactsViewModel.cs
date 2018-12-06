@@ -121,7 +121,7 @@ namespace Phonebook.Core.ViewModels.Contacts
 
         private Task<bool> NavigateToDetails(ContactItemVm item)
         {
-            return _navigationService.Navigate<ContactDetailsViewModel, ContactItemVm>(item);
+            return _navigationService.Navigate<ContactDetailsViewModel, User>(item.Model);
         }
 
         public override void ViewCreated()
