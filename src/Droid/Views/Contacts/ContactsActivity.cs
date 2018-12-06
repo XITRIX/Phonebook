@@ -43,13 +43,13 @@ namespace Phonebook.Droid.Contacts
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    if (FragmentManager.BackStackEntryCount >= 1)
+                    if (SupportFragmentManager.BackStackEntryCount >= 1)
                     {
-                        if (FragmentManager.BackStackEntryCount == 1)
+                        if (SupportFragmentManager.BackStackEntryCount == 1)
                         {
                             SupportActionBar.SetDisplayHomeAsUpEnabled(false);
                         }
-                        FragmentManager.PopBackStack();
+                        SupportFragmentManager.PopBackStack();
                     }
                     return true;
             }

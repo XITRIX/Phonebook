@@ -3,6 +3,8 @@ using MvvmCross.Platforms.Android.Core;
 using Phonebook.API;
 using Phonebook.API.Services.Connection;
 using Xamarin.Android.Net;
+using MvvmCross.Platforms.Android.Presenters;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Phonebook.Droid
 {
@@ -13,6 +15,11 @@ namespace Phonebook.Droid
             base.InitializeFirstChance();
 
             Mvx.IoCProvider.RegisterSingleton<IConnectionService>(() => new ConnectionService(new AndroidClientHandler()));
+        }
+
+        protected override IMvxAndroidViewPresenter CreateViewPresenter()
+        {
+            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
         }
     }
 }
