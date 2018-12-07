@@ -1,5 +1,4 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -13,7 +12,7 @@ using Phonebook.Core.ViewModels.Contacts;
 namespace Phonebook.Droid.Contacts
 {
     [MvxActivityPresentation]
-    [Activity(Theme = "@style/MainTheme")]
+    [Activity]
     public class ContactsActivity : MvxAppCompatActivity<ContactsViewModel>
     {
         protected override void OnCreate(Bundle bundle)

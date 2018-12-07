@@ -111,6 +111,7 @@
     <Folder Include="Views\Contacts\Cells\" />
     <Folder Include="Views\ContactDetails\" />
     <Folder Include="Views\ContactPhoto\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.xib" />
@@ -146,6 +147,7 @@
     <Compile Include="Views\ContactPhoto\ContactPhotoViewController.designer.cs">
       <DependentUpon>ContactPhotoViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\DialogService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Phonebook.Core.csproj">

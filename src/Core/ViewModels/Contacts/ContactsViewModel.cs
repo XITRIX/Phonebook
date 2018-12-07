@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Phonebook.API.Models;
 using Phonebook.API.Services.Contacts;
-using Phonebook.Core.ViewModels.Contacts.Items;
+using Phonebook.Core.Services;
 using Phonebook.Core.ViewModels.ContactDetails;
+using Phonebook.Core.ViewModels.Contacts.Items;
 
 namespace Phonebook.Core.ViewModels.Contacts
 {
     public class ContactsViewModel : MvxViewModel
     {
         private const int COUNT = 10;
+
+        private int _page = 1;
+
         private readonly IMvxNavigationService _navigationService;
         private readonly IContactsService _contactsService;
-        private int _page = 1;
+        private readonly IDialogService _dialogService;
 
         public string Title => "Contacts";
 
@@ -37,10 +40,11 @@ namespace Phonebook.Core.ViewModels.Contacts
             set => SetProperty(ref _items, value);
         }
 
-        public ContactsViewModel(IMvxNavigationService navigationService, IContactsService contactsService)
+        public ContactsViewModel(IMvxNavigationService navigationService, IContactsService contactsService, IDialogService dialogService)
         {
             _contactsService = contactsService;
             _navigationService = navigationService;
+            _dialogService = dialogService;
 
             Items = new MvxObservableCollection<ContactItemVm>();
         }
@@ -67,13 +71,10 @@ namespace Phonebook.Core.ViewModels.Contacts
             {
                 var result = await _contactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
 
-                if (result == null)
+                if (result == null || !result.Contacts.Any())
                 {
-                    throw new ArgumentException("Result can not be null");
-                }
-                if (!result.Contacts.Any())
-                {
-                    throw new ArgumentException("Result can not be empty");
+                    _dialogService.CreateOneButtonDialog("Error", "Error retrieving data from server, check your internet connection", "Reload", async () => { await RefreshContacts(); });
+                    return;
                 }
 
                 _page++;

@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Phonebook.Core
+
+namespace Phonebook.Core.Services
 {
     public interface IDialogService
     {
