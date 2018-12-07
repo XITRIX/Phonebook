@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Phonebook.API;
 using Phonebook.API.Models;
-using Phonebook.API;
 namespace Phonebook.Core.ViewModels.Contacts.Items
 {
     public class ContactItemVm
@@ -8,7 +7,7 @@ namespace Phonebook.Core.ViewModels.Contacts.Items
         public User Model { get; set; }
         public ContactItemVm(User model)
         {
-            this.Model = model;
+            Model = model;
         }
 
         public string FullName => $"{Model.Name.Last.FirstCharToUpper()} {Model.Name.First.FirstCharToUpper()}";

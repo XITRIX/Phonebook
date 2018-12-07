@@ -12,6 +12,8 @@
     <Folder Include="ViewModels\Contacts\" />
     <Folder Include="ViewModels\Contacts\Items\" />
     <Folder Include="ViewModels\ContactDetails\" />
+    <Folder Include="ViewModels\ContactPhoto\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\API\Phonebook.API.csproj" />
