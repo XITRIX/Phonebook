@@ -16,6 +16,7 @@ namespace Phonebook.Core.ViewModels.Contacts
     {
         private const int COUNT = 10;
         private readonly IMvxNavigationService _navigationService;
+        private readonly IContactsService _contactsService;
         private int _page = 1;
 
         public string Title => "Contacts";
@@ -36,11 +37,9 @@ namespace Phonebook.Core.ViewModels.Contacts
             set => SetProperty(ref _items, value);
         }
 
-        protected IContactsService ContactsService { get; set; }
-
         public ContactsViewModel(IMvxNavigationService navigationService, IContactsService contactsService)
         {
-            ContactsService = contactsService;
+            _contactsService = contactsService;
             _navigationService = navigationService;
 
             Items = new MvxObservableCollection<ContactItemVm>();
@@ -66,7 +65,7 @@ namespace Phonebook.Core.ViewModels.Contacts
 
             try
             {
-                var result = await ContactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
+                var result = await _contactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
 
                 if (result == null)
                 {
@@ -121,7 +120,7 @@ namespace Phonebook.Core.ViewModels.Contacts
 
         private Task<bool> NavigateToDetails(ContactItemVm item)
         {
-            return _navigationService.Navigate<ContactDetailsViewModel, ContactItemVm>(item);
+            return _navigationService.Navigate<ContactDetailsViewModel, User>(item.Model);
         }
 
         public override void ViewCreated()

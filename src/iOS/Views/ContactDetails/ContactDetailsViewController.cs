@@ -21,7 +21,7 @@ namespace Phonebook.iOS.Views.ContactDetails
             base.ViewDidLoad();
 
             var set = this.CreateBindingSet<ContactDetailsViewController, ContactDetailsViewModel>();
-            set.Bind(image).For(i => i.ImagePath).To(vm => vm.Photo);
+            set.Bind(image).For(i => i.ImagePath).To(vm => vm.PhotoPath);
             set.Bind(name).To(vm => vm.Name);
             set.Bind(phone).To(vm => vm.Phone);
             set.Bind(mail).To(vm => vm.Mail);
