@@ -37,14 +37,14 @@ namespace Phonebook.Droid.Contacts
                 PagingCommand.Execute(null);
         }
 
-        public override int ItemCount => ItemsSource == null ? 0 : ItemsSource.Count() + 1;
+        //public override int ItemCount => ItemsSource == null ? 0 : ItemsSource.Count() + 1;
 
-        public override int GetItemViewType(int position)
-        {
-            return position == ItemsSource.Count()
-                ? FOOTER_VIEW 
-                : base.GetItemViewType(position);
-        }
+        //public override int GetItemViewType(int position)
+        //{
+        //    return position == ItemsSource.Count()
+        //        ? FOOTER_VIEW 
+        //        : base.GetItemViewType(position);
+        //}
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {

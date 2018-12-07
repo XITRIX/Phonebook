@@ -27,6 +27,7 @@ namespace Phonebook.iOS.Views.Contacts
 
             set.Bind(source).To(vm => vm.Items);
             set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
+            set.Bind(source).For(s => s.SelectionChangedCommand).To(vm => vm.NavigateToDetailsCommand);
 
             set.Bind(this).For(s => s.Title).To(vm => vm.Title);
 
