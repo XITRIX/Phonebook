@@ -18,7 +18,7 @@ namespace Phonebook.iOS.Views.ContactPhoto
             base.ViewDidLoad();
 
             var set = this.CreateBindingSet<ContactPhotoViewController, ContactPhotoViewModel>();
-            set.Bind(image).For(s => s.ImagePath).To(vm => vm.Photo);
+            set.Bind(image).For(s => s.ImagePath).To(vm => vm.PhotoPath);
             set.Apply();
         }
     }

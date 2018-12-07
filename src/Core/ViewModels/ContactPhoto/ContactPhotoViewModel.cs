@@ -4,11 +4,11 @@ namespace Phonebook.Core.ViewModels.ContactPhoto
 {
     public class ContactPhotoViewModel : MvxViewModel<string>
     {
-        public string Photo { get; set; }
+        public string PhotoPath { get; set; }
 
         public override void Prepare(string parameter)
         {
-            Photo = parameter;
+            PhotoPath = parameter;
         }
     }
 }
