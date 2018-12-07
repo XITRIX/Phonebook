@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.2.2" />
+    <PackageReference Include="Realm" Version="3.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -14,6 +15,7 @@
     <Folder Include="ViewModels\ContactDetails\" />
     <Folder Include="ViewModels\ContactPhoto\" />
     <Folder Include="Services\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\API\Phonebook.API.csproj" />

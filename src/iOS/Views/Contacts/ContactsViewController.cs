@@ -2,8 +2,10 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using Phonebook.Core.Models;
 using Phonebook.Core.ViewModels.Contacts;
 using Phonebook.iOS.Views.Contacts.Cells;
+using Realms;
 using UIKit;
 
 namespace Phonebook.iOS.Views.Contacts

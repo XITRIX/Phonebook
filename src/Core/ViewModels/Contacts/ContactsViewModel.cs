@@ -9,6 +9,11 @@ using Phonebook.API.Services.Contacts;
 using Phonebook.Core.Services;
 using Phonebook.Core.ViewModels.ContactDetails;
 using Phonebook.Core.ViewModels.Contacts.Items;
+using System.Collections.Generic;
+using Realms;
+using Phonebook.Core.Models;
+using Newtonsoft.Json;
+using System.Threading;
 
 namespace Phonebook.Core.ViewModels.Contacts
 {
@@ -18,6 +23,7 @@ namespace Phonebook.Core.ViewModels.Contacts
 
         private int _page = 1;
 
+        private Realm _realm;
         private readonly IMvxNavigationService _navigationService;
         private readonly IContactsService _contactsService;
         private readonly IDialogService _dialogService;
@@ -71,15 +77,16 @@ namespace Phonebook.Core.ViewModels.Contacts
             {
                 var result = await _contactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
 
+                MvxObservableCollection<ContactItemVm> dataSource;
                 if (result == null || !result.Contacts.Any())
                 {
-                    _dialogService.CreateOneButtonDialog("Error", "Error retrieving data from server, check your internet connection", "Reload", async () => { await RefreshContacts(); });
+                    _dialogService.CreateOneButtonCancelingDialog("Error", "Error retrieving data from server, check your internet connection", "Close", "Reload", async () => { await RefreshContacts(); });
                     return;
                 }
+                dataSource = new MvxObservableCollection<ContactItemVm>(result.Contacts.Select(SetupItem));
+                var localPage = _page;
 
                 _page++;
-
-                var dataSource = new MvxObservableCollection<ContactItemVm>(result.Contacts.Select(SetupItem));
 
                 Items.AddRange(dataSource);
             }

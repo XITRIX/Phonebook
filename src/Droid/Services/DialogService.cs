@@ -20,5 +20,16 @@ namespace Phonebook.Droid.Services
                 })
                 .Show();
         }
+        public void CreateOneButtonCancelingDialog(string title, string message, string cancel, string button, Action buttonAction)
+        {
+            new AlertDialog.Builder(CurrentActivity).SetTitle(title)
+                .SetMessage(message)
+                .SetPositiveButton(button, (sender, e) =>
+                {
+                    buttonAction();
+                })
+                .SetNegativeButton(cancel, (s, e) => { })
+                .Show();
+        }
     }
 }
