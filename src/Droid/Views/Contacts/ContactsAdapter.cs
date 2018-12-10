@@ -6,15 +6,15 @@ using Android.Views;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
-using MvvmCross.Binding.BindingContext;
 
 namespace Phonebook.Droid.Contacts
 {
     public class ContactsAdapter : MvxRecyclerAdapter
     {
-        private const int FOOTER_VIEW = -999;
+        protected int FooterViewType { get; } = Resource.Layout.recycler_loading_footer;
 
         public ICommand PagingCommand { get; set; }
+
         public bool IsLoading { get; set; }
 
         public ContactsAdapter()
@@ -37,36 +37,31 @@ namespace Phonebook.Droid.Contacts
                 PagingCommand.Execute(null);
         }
 
-        //public override int ItemCount => ItemsSource == null ? 0 : ItemsSource.Count() + 1;
+        public override int ItemCount => ItemsSource?.Count() == 0 ? 0 : ItemsSource.Count() + 1;
 
-        //public override int GetItemViewType(int position)
-        //{
-        //    return position == ItemsSource.Count()
-        //        ? FOOTER_VIEW 
-        //        : base.GetItemViewType(position);
-        //}
-
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        public override int GetItemViewType(int position)
         {
-            if (viewType == FOOTER_VIEW)
-            {
-                var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
+            return position == ItemsSource.Count()
+                ? FooterViewType
+                : base.GetItemViewType(position);
+        }
 
-                var vh = new MvxRecyclerViewHolder(itemBindingContext.BindingInflate(Resource.Layout.recycler_loading_footer, parent, false), itemBindingContext)
-                {
-                    Click = ItemClick,
-                    LongClick = ItemLongClick,
-                    Id = Resource.Layout.recycler_loading_footer
-                };
+        protected override View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
+        {
+            var layoutId = viewType == FooterViewType ? FooterViewType : ItemTemplateSelector.GetItemLayoutId(viewType);
+            return bindingContext.BindingInflate(layoutId, parent, false);
+        }
 
-                return vh;
-            }
-            return base.OnCreateViewHolder(parent, viewType);
+        public override object GetItem(int viewPosition)
+        {
+            CheckPositionForPagination(viewPosition);
+
+            return base.GetItem(viewPosition);
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            if (holder.ItemViewType == FOOTER_VIEW)
+            if (holder.ItemViewType == FooterViewType)
             {
                 ((IMvxRecyclerViewHolder)holder).DataContext = BindingContext.DataContext;
             }
@@ -74,8 +69,6 @@ namespace Phonebook.Droid.Contacts
             {
                 base.OnBindViewHolder(holder, position);
             }
-
-            CheckPositionForPagination(position);
         }
     }
 }

@@ -13,11 +13,13 @@ namespace Phonebook.iOS.Views.Contacts
         public ContactsTableSource(IntPtr handle)
             : base(handle)
         {
+            DeselectAutomatically = true;
         }
 
         public ContactsTableSource(UITableView tableView, string nibName, string cellIdentifier = null, NSBundle bundle = null)
             : base(tableView, nibName, cellIdentifier, bundle)
         {
+            DeselectAutomatically = true;
         }
 
         public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)

@@ -18,7 +18,7 @@
                 android:layout_height   ="124dp"
                 android:layout_gravity  ="center"
                 android:layout_marginTop="20dp"
-                app:MvxBind             ="ImagePath Photo; Click NavigateToPhotoCommand" />
+                app:MvxBind             ="ImagePath PhotoPath; Click NavigateToPhotoCommand" />
             <TextView
                 android:layout_width ="match_parent"
                 android:layout_height="wrap_content"

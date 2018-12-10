@@ -25,16 +25,20 @@ namespace Phonebook.Droid.Contacts
             SetSupportActionBar(toolBar);
 
             var recyclerView = FindViewById<MvxRecyclerView>(Resource.Id.recyclerView);
-            var recyclerAdapter = new ContactsAdapter((IMvxAndroidBindingContext)BindingContext);
+            var recyclerAdapter = new ContactsAdapter((IMvxAndroidBindingContext)BindingContext)
+            {
+                PagingCommand = ViewModel.LoadContactsCommand,
+                IsLoading = ViewModel.IsLoading
+            };
 
             recyclerView.Adapter = recyclerAdapter;
 
-            var set = this.CreateBindingSet<ContactsActivity, ContactsViewModel>();
-            set.Bind(recyclerAdapter).For(s => s.ItemsSource).To(vm => vm.Items);
-            set.Bind(recyclerAdapter).For(s => s.ItemClick).To(vm => vm.NavigateToDetailsCommand);
-            set.Bind(recyclerAdapter).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
-            set.Bind(recyclerAdapter).For(s => s.IsLoading).To(vm => vm.IsLoading);
-            set.Apply();
+            //var set = this.CreateBindingSet<ContactsActivity, ContactsViewModel>();
+            //set.Bind(recyclerAdapter).For(s => s.ItemsSource).To(vm => vm.Items);
+            //set.Bind(recyclerAdapter).For(s => s.ItemClick).To(vm => vm.NavigateToDetailsCommand);
+            //set.Bind(recyclerAdapter).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
+            //set.Bind(recyclerAdapter).For(s => s.IsLoading).To(vm => vm.IsLoading);
+            //set.Apply();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -42,17 +46,28 @@ namespace Phonebook.Droid.Contacts
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
-                    if (SupportFragmentManager.BackStackEntryCount >= 1)
-                    {
-                        if (SupportFragmentManager.BackStackEntryCount == 1)
-                        {
-                            SupportActionBar.SetDisplayHomeAsUpEnabled(false);
-                        }
-                        SupportFragmentManager.PopBackStack();
-                    }
-                    return true;
+                    return PopUp();
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (!PopUp())
+                base.OnBackPressed();
+        }
+
+        private bool PopUp() {
+            if (SupportFragmentManager.BackStackEntryCount >= 1)
+            {
+                if (SupportFragmentManager.BackStackEntryCount == 1)
+                {
+                    SupportActionBar.SetDisplayHomeAsUpEnabled(false);
+                }
+                SupportFragmentManager.PopBackStack();
+                return true;
+            }
+            return false;
         }
     }
 }

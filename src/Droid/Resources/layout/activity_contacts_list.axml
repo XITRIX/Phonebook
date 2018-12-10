@@ -13,16 +13,17 @@
     <RelativeLayout
         android:layout_width ="match_parent"
         android:layout_height="match_parent">
-        <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+        <mvvmcross.droid.support.v4.MvxSwipeRefreshLayout
             android:layout_height="match_parent"
             android:layout_width ="match_parent"
             app:MvxBind          ="RefreshCommand RefreshContactsCommand; Refreshing IsRefreshing">
-            <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+            <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
                 android:id           ="@+id/recyclerView"
                 android:layout_width ="match_parent"
                 android:layout_height="match_parent"
-                app:MvxItemTemplate  ="@layout/contact_item" />
-        </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+                app:MvxItemTemplate  ="@layout/contact_item"
+                app:MvxBind          ="ItemsSource Items; ItemClick NavigateToDetailsCommand" />
+        </mvvmcross.droid.support.v4.MvxSwipeRefreshLayout>
         <FrameLayout
             android:id           ="@+id/contentFrame"
             android:layout_width ="match_parent"

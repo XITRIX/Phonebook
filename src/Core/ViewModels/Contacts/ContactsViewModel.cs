@@ -9,6 +9,13 @@ using Phonebook.API.Services.Contacts;
 using Phonebook.Core.Services;
 using Phonebook.Core.ViewModels.ContactDetails;
 using Phonebook.Core.ViewModels.Contacts.Items;
+using System.Collections.Generic;
+using Realms;
+using Phonebook.Core.Models;
+using Newtonsoft.Json;
+using System.Threading;
+using MvvmCross;
+using Phonebook.API.Services.Reachability;
 
 namespace Phonebook.Core.ViewModels.Contacts
 {
@@ -23,6 +30,8 @@ namespace Phonebook.Core.ViewModels.Contacts
         private readonly IDialogService _dialogService;
 
         public string Title => "Contacts";
+
+        private bool _wasInternetConnectionErrorMessage = false;
 
         private IMvxCommand _loadContactsCommand;
         public IMvxCommand LoadContactsCommand => _loadContactsCommand ?? (_loadContactsCommand = new MvxAsyncCommand(LoadContacts, () => !IsLoading));
@@ -47,6 +56,14 @@ namespace Phonebook.Core.ViewModels.Contacts
             _dialogService = dialogService;
 
             Items = new MvxObservableCollection<ContactItemVm>();
+
+            Mvx.IoCProvider.Resolve<IReachabilityService>().AddConnectionChangedEvent(async (connected) =>
+            {
+                if (_wasInternetConnectionErrorMessage && connected) {
+                    _wasInternetConnectionErrorMessage = false;
+                    await LoadContacts();
+                }
+            });
         }
 
         private bool _isRefreshing;
@@ -71,15 +88,20 @@ namespace Phonebook.Core.ViewModels.Contacts
             {
                 var result = await _contactsService.GetContacts(_page, COUNT).ConfigureAwait(false);
 
+                MvxObservableCollection<ContactItemVm> dataSource;
                 if (result == null || !result.Contacts.Any())
                 {
-                    _dialogService.CreateOneButtonDialog("Error", "Error retrieving data from server, check your internet connection", "Reload", async () => { await RefreshContacts(); });
+                    if (!_wasInternetConnectionErrorMessage)
+                    {
+                        _wasInternetConnectionErrorMessage = true;
+                        _dialogService.CreateOneButtonCancelingDialog("Error", "Error retrieving data from server, check your internet connection", "Close", "Reload", async () => { await RefreshContacts(); });
+                    }
                     return;
                 }
+                _wasInternetConnectionErrorMessage = false;
+                dataSource = new MvxObservableCollection<ContactItemVm>(result.Contacts.Select(SetupItem));
 
                 _page++;
-
-                var dataSource = new MvxObservableCollection<ContactItemVm>(result.Contacts.Select(SetupItem));
 
                 Items.AddRange(dataSource);
             }
@@ -111,7 +133,7 @@ namespace Phonebook.Core.ViewModels.Contacts
         {
             _page = 1;
 
-            Items.Clear();
+            Items = new MvxObservableCollection<ContactItemVm>();
         }
 
         private ContactItemVm SetupItem(User model)

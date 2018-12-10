@@ -2,8 +2,10 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using Phonebook.Core.Models;
 using Phonebook.Core.ViewModels.Contacts;
 using Phonebook.iOS.Views.Contacts.Cells;
+using Realms;
 using UIKit;
 
 namespace Phonebook.iOS.Views.Contacts
@@ -26,8 +28,8 @@ namespace Phonebook.iOS.Views.Contacts
             var set = this.CreateBindingSet<ContactsViewController, ContactsViewModel>();
 
             set.Bind(source).To(vm => vm.Items);
-            set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
             set.Bind(source).For(s => s.SelectionChangedCommand).To(vm => vm.NavigateToDetailsCommand);
+            set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
 
             set.Bind(this).For(s => s.Title).To(vm => vm.Title);
 
