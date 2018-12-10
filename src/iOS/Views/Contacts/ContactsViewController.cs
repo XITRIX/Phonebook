@@ -28,8 +28,8 @@ namespace Phonebook.iOS.Views.Contacts
             var set = this.CreateBindingSet<ContactsViewController, ContactsViewModel>();
 
             set.Bind(source).To(vm => vm.Items);
-            set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
             set.Bind(source).For(s => s.SelectionChangedCommand).To(vm => vm.NavigateToDetailsCommand);
+            set.Bind(source).For(s => s.PagingCommand).To(vm => vm.LoadContactsCommand);
 
             set.Bind(this).For(s => s.Title).To(vm => vm.Title);
 
