@@ -1,54 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using Realms;
-using System.Linq;
+﻿using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Phonebook.API.Services.DataBase;
+
 namespace Phonebook.API.Services.Cache
 {
-    public class CacheService
+    public class CacheService : ICacheService
     {
-        private Realm _realm;
+        private readonly IDataBaseService _dataBase;
 
-        private void CacheItems<T>(T data) where T : RealmObject
+        public CacheService(IDataBaseService dataBase)
         {
-            _realm = Realm.GetInstance();
-            _realm.Write(() =>
+            _dataBase = dataBase;
+        }
+
+        public async Task CacheRequestAsync(HttpResponseMessage response)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            _dataBase.Save(response.RequestMessage.RequestUri.AbsoluteUri, content);
+        }
+
+        public Task<HttpResponseMessage> GetCachedRequest(string uri)
+        {
+            return Task.Run(() =>
             {
-                _realm.Add(data);
+                var cacheContent = _dataBase.LoadString(uri);
+                return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(cacheContent) };
             });
         }
-
-        private List<T> GetCachedItems<T>() where T : RealmObject
-        {
-            _realm = Realm.GetInstance();
-            return _realm.All<T>().ToList();
-        }
-
-        //private void CacheItems(int page, MvxObservableCollection<ContactItemVm> data)
-        //{
-        //    new Thread(() =>
-        //    {
-        //        _realm = Realm.GetInstance();
-        //        _realm.Write(() =>
-        //        {
-        //            _realm.Add(new UsersListCacheModel
-        //            {
-        //                SeriallizedContactItemsList = JsonConvert.SerializeObject(new List<ContactItemVm>(data)),
-        //                Page = page
-        //            }, true);
-        //        });
-        //    }).Start();
-        //}
-
-        //private MvxObservableCollection<ContactItemVm> GetCachedItems(int page)
-        //{
-        //    _realm = Realm.GetInstance();
-        //    var cachedPage = (from d in _realm.All<UsersListCacheModel>() where d.Page == _page select d).First();
-        //    if (cachedPage != null)
-        //    {
-        //        return new MvxObservableCollection<ContactItemVm>(JsonConvert.DeserializeObject<List<ContactItemVm>>(cachedPage.SeriallizedContactItemsList));
-        //    }
-        //    return null;
-        //}
     }
 }

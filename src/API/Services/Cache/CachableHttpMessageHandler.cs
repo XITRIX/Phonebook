@@ -1,38 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross;
+using System;
+using Phonebook.API.Services.Reachability;
 
 namespace Phonebook.API.Services.Cache
 {
-    //public class CachableHttpMessageHandler : HttpMessageHandler
-    //{
-    //    // Responses to return
-    //    private readonly Queue<HttpResponseMessage> _responses =
-    //        new Queue<HttpResponseMessage>();
+    public class CachableHttpMessageHandler : HttpMessageHandler
+    {
+        private readonly HttpMessageInvoker _handlerInvoker;
+        private readonly ICacheService _cacheService;
+        private readonly IReachabilityService _reachabilityService;
 
-    //    // Requests that were sent via the handler
-    //    private readonly List<HttpRequestMessage> _requests =
-    //        new List<HttpRequestMessage>();
+        public CachableHttpMessageHandler(HttpMessageHandler handler, ICacheService cacheService, IReachabilityService reachabilityService)
+        {
+            _handlerInvoker = new HttpMessageInvoker(handler);
+            _cacheService = cacheService;
+            _reachabilityService = reachabilityService;
+        }
 
-    //    private readonly HttpMessageHandler _httpMessageHandler;
-    //    public CachableHttpMessageHandler(HttpMessageHandler httpMessageHandler)
-    //    {
-    //        _httpMessageHandler = httpMessageHandler;
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            HttpResponseMessage result = null;
 
-    //        //HttpClient i = new HttpMessageInvoker(httpMessageHandler);
-    //        //var c = new HttpClient(i);
-    //    }
+            if (!_reachabilityService.IsConnected())
+            {
+                result = await _cacheService.GetCachedRequest(request.RequestUri.AbsoluteUri).ConfigureAwait(false);
+            }
+            else
+            {
+                result = await _handlerInvoker.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-    //    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-    //    {
-    //        if(_responses.Count == 0)
-    //            throw new InvalidOperationException("No response configured");
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                    await _cacheService.CacheRequestAsync(result).ConfigureAwait(false);
+            }
 
-    //        _requests.Add(request);
-    //        var response = _responses.Dequeue();
-    //        return Task.FromResult(response);
-    //    }
-    //}
+            return result;
+        }
+    }
 }

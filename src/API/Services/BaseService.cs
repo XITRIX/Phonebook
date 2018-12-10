@@ -32,12 +32,13 @@ namespace Phonebook.API.Services
         private async Task<T> ParseResult<T>(RequestResult requestResult)
             where T : class, new()
         {
+            Console.WriteLine("BaseService: " + requestResult.ResponseCode);
             if (requestResult.ResponseCode == System.Net.HttpStatusCode.OK)
             {
                 var result = await requestResult.Data.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(result);
             }
-            return default(T);
+            return null;
         }
     }
 }
