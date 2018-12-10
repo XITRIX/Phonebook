@@ -5,6 +5,8 @@ using Phonebook.API.Services.Connection;
 using Phonebook.Core.Services;
 using Phonebook.Droid.Services;
 using Xamarin.Android.Net;
+using Phonebook.API.Services.Cache;
+using Phonebook.API.Services.Reachability;
 
 namespace Phonebook.Droid
 {
@@ -14,8 +16,13 @@ namespace Phonebook.Droid
         {
             base.InitializeFirstChance();
 
-            Mvx.IoCProvider.RegisterSingleton<IConnectionService>(() => new ConnectionService(new AndroidClientHandler()));
+            Mvx.IoCProvider.RegisterSingleton<IConnectionService>(() => new ConnectionService(CreateHandler()));
             Mvx.IoCProvider.RegisterSingleton<IDialogService>(() => new DialogService());
+        }
+
+        private CachableHttpMessageHandler CreateHandler()
+        {
+            return new CachableHttpMessageHandler(new AndroidClientHandler(), Mvx.IoCProvider.Resolve<ICacheService>(), Mvx.IoCProvider.Resolve<IReachabilityService>());
         }
     }
 }
