@@ -16,15 +16,19 @@ namespace Phonebook.API.Services.Cache
 
         public async Task CacheRequestAsync(HttpResponseMessage response)
         {
+            if (response == null || response.Content == null) { return; }
+
             var content = await response.Content.ReadAsStringAsync();
-            _dataBase.Save(response.RequestMessage.RequestUri.AbsoluteUri, content);
+            await _dataBase.Save(response.RequestMessage.RequestUri.AbsoluteUri, content);
         }
 
         public Task<HttpResponseMessage> GetCachedRequest(string uri)
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
-                var cacheContent = _dataBase.LoadString(uri);
+                var cacheContent = await _dataBase.LoadString(uri);
+                if (cacheContent == null) { return null; }
+
                 return new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(cacheContent) };
             });
         }

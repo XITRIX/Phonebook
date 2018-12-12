@@ -2,6 +2,7 @@
 using MvvmCross.Platforms.Ios.Views;
 using Phonebook.Core.ViewModels.ContactDetails;
 using MvvmCross.Platforms.Ios.Binding;
+using UIKit;
 
 namespace Phonebook.iOS.Views.ContactDetails
 {
@@ -22,6 +23,11 @@ namespace Phonebook.iOS.Views.ContactDetails
             set.Bind(phone).To(vm => vm.Phone);
             set.Bind(mail).To(vm => vm.Mail);
             set.Apply();
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            {
+                NavigationItem.LargeTitleDisplayMode = UINavigationItemLargeTitleDisplayMode.Never;
+            }
         }
     }
 }

@@ -1,0 +1,35 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.UnitTests", "Phonebook.UnitTests\Phonebook.UnitTests.csproj", "{AEA2CB6B-1D59-4DC4-B676-8FEA5EBD90EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phonebook", "Phonebook", "{B282DC2A-E546-4B86-A809-62C9AFED0B18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Core", "..\src\Core\Phonebook.Core.csproj", "{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.API", "..\src\API\Phonebook.API.csproj", "{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEA2CB6B-1D59-4DC4-B676-8FEA5EBD90EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA2CB6B-1D59-4DC4-B676-8FEA5EBD90EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA2CB6B-1D59-4DC4-B676-8FEA5EBD90EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA2CB6B-1D59-4DC4-B676-8FEA5EBD90EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E67384FA-0DA5-4E81-A12C-3B37FDA2DAA0} = {B282DC2A-E546-4B86-A809-62C9AFED0B18}
+		{43DD0ED0-14A6-46F1-9D6C-ADEE49D5B90D} = {B282DC2A-E546-4B86-A809-62C9AFED0B18}
+	EndGlobalSection
+EndGlobal

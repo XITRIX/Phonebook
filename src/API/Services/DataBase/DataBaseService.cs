@@ -1,25 +1,46 @@
 ﻿using Realms;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Phonebook.API.Services.DataBase
 {
     public class DataBaseService : IDataBaseService
     {
-        public void Save(string key, string data)
+        public Task Save(string key, string data)
         {
-            var realm = Realm.GetInstance();
-            using (var transaction = realm.BeginWrite())
+            return Task.Run(() =>
             {
-                var dbo = new DataBaseStringItemModel(key, data);
-                realm.Add(dbo, true);
-                transaction.Commit();
-            }
+                var realm = Realm.GetInstance();
+                using (var transaction = realm.BeginWrite())
+                {
+                    var dbo = new DataBaseStringItemModel(key, data);
+                    realm.Add(dbo, true);
+                    transaction.Commit();
+                }
+            });
         }
 
-        public string LoadString(string key)
+        public Task<string> LoadString(string key)
         {
-            var dbo = Realm.GetInstance().Find<DataBaseStringItemModel>(key);
-            return dbo.Data;
+            return Task.Run(() =>
+            {
+                var dbo = Realm.GetInstance()
+                               .Find<DataBaseStringItemModel>(key);
+
+                return dbo?.Data;
+            });
+        }
+
+        public Task ClearAll() {
+            return Task.Run(() =>
+            {
+                var realm = Realm.GetInstance();
+                using (var transaction = realm.BeginWrite())
+                {
+                    realm.RemoveAll<DataBaseStringItemModel>();
+                    transaction.Commit();
+                }
+            });
         }
     }
 }

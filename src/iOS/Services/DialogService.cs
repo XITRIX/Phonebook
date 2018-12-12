@@ -11,7 +11,6 @@ namespace Phonebook.iOS.Services
         {
             DispatchQueue.MainQueue.DispatchAsync(() =>
             {
-                dialogExists = true;
                 var controller = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
                 var action = UIAlertAction.Create(button, UIAlertActionStyle.Default, (handler) =>
                 {
@@ -26,14 +25,13 @@ namespace Phonebook.iOS.Services
         {
             DispatchQueue.MainQueue.DispatchAsync(() =>
             {
-                dialogExists = true;
                 var controller = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
                 var action = UIAlertAction.Create(button, UIAlertActionStyle.Default, (handler) =>
                 {
                     buttonAction();
                 });
                 controller.AddAction(action);
-                controller.AddAction(UIAlertAction.Create(cancel, UIAlertActionStyle.Cancel, (_) => { dialogExists = false; }));
+                controller.AddAction(UIAlertAction.Create(cancel, UIAlertActionStyle.Cancel, (_) => { }));
                 UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(controller, true, null);
             });
         }

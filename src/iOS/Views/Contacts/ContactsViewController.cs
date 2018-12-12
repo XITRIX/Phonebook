@@ -57,8 +57,10 @@ namespace Phonebook.iOS.Views.Contacts
         {
             _refreshControl = new MvxUIRefreshControl();
 
-            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
             {
+                NavigationController.NavigationBar.PrefersLargeTitles = true;
+                NavigationItem.LargeTitleDisplayMode = UINavigationItemLargeTitleDisplayMode.Automatic;
                 tableView.RefreshControl = _refreshControl;
             }
             else
